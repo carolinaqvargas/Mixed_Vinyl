@@ -9,8 +9,8 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 class SongController extends AbstractController
 {
-    #[Route('/api/songs/{id}')]
-    public function getSong($id): Response
+    #[Route('/api/songs/{id<\d+>}', methods: ['GET'])]  //d+ regex meaning a digit of any lenth
+    public function getSong(int $id): Response
     {
         // TODO query the database
         $song = [
@@ -18,7 +18,7 @@ class SongController extends AbstractController
             'name' => 'Waterfalls',
             'url' => 'https://symfonycasts.s3.amazonaws.com/sample.mp3',
         ];
-        
+
        //return new JsonResponse($song);
        return $this->json($song);
     }
